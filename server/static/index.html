@@ -7,31 +7,39 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Sora:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/static/css/styles.css" />
   </head>
   <body>
-    <div class="atmosphere" aria-hidden="true"></div>
-
     <header class="topbar">
-      <a class="wordmark" href="/">Smart Chef</a>
+      <div class="topbar-inner">
+        <a class="wordmark" href="/">
+          <span class="logo-mark" aria-hidden="true"></span>
+          Smart Chef
+        </a>
+        <nav class="top-nav">
+          <a href="#workspace">Scan</a>
+          <a href="#pantry-section">Pantry</a>
+          <a href="#classes-section">Aisles</a>
+        </nav>
+      </div>
     </header>
 
     <main>
       <section class="hero" id="classify">
         <div class="hero-copy">
           <p class="brand">Smart Chef</p>
-          <h1>Snap a grocery. Know it instantly.</h1>
+          <h1>Groceries in. Recipes out.</h1>
           <p class="lede">
-            Upload a photo and our kitchen-trained CNN names the ingredient —
-            pasta, coffee, milk, and twenty-two more staples.
+            Snap ingredients from your kitchen, confirm them, and get recipes
+            built around what you already have.
           </p>
           <div class="cta-row">
             <label class="cta" for="file-input">Upload a photo</label>
             <button type="button" class="cta ghost" id="sample-hint">
-              See what it recognizes
+              Browse aisles
             </button>
           </div>
         </div>
@@ -41,7 +49,7 @@
         </div>
       </section>
 
-      <section class="workspace" aria-label="Classification workspace">
+      <section class="workspace shell" id="workspace" aria-label="Classification workspace">
         <form class="dropzone" id="upload-form">
           <input
             id="file-input"
@@ -50,8 +58,8 @@
             hidden
           />
           <div class="dropzone-inner" id="drop-target">
-            <p class="drop-title">Drop an ingredient photo here</p>
-            <p class="drop-sub">or click to browse — JPEG, PNG, WebP</p>
+            <p class="drop-title">Add an ingredient photo</p>
+            <p class="drop-sub">Drop an image here, or click to browse</p>
           </div>
           <div class="preview-wrap" id="preview-wrap" hidden>
             <img id="preview" alt="Uploaded grocery preview" />
@@ -61,49 +69,94 @@
 
         <aside class="result-panel" id="result-panel" aria-live="polite">
           <p class="result-idle" id="result-idle">
-            Your classification will appear here after you upload.
+            Scan a grocery item and we’ll identify it here.
           </p>
           <div id="result-body" hidden>
-            <p class="result-kicker">Model guess</p>
+            <p class="result-kicker">We think this is</p>
             <h2 id="result-label">—</h2>
             <p class="confidence" id="result-confidence"></p>
             <ul class="topk" id="topk"></ul>
 
             <form class="confirm-form" id="confirm-form">
-              <label class="confirm-heading" for="custom-class">Confirm the food</label>
+              <label class="confirm-heading" for="custom-class">Confirm item</label>
               <p class="confirm-hint">
-                Edit if the guess is wrong, then confirm.
+                Edit if needed, then add it to your pantry.
               </p>
               <input
                 type="text"
                 id="custom-class"
                 class="custom-class"
                 name="food-class"
-                placeholder="Food name"
+                placeholder="Item name"
                 autocomplete="off"
               />
               <button type="submit" class="cta confirm-btn" id="confirm-btn">
-                Confirm
+                Add to pantry
               </button>
               <p class="confirm-status" id="confirm-status" hidden></p>
             </form>
           </div>
           <p class="result-error" id="result-error" hidden></p>
-          <p class="result-loading" id="result-loading" hidden>Reading the pantry…</p>
+          <p class="result-loading" id="result-loading" hidden>Identifying item…</p>
         </aside>
       </section>
 
-      <section class="classes" id="classes-section">
-        <h2>What Smart Chef knows</h2>
+      <section class="pantry shell" id="pantry-section" aria-label="Ingredient pantry">
+        <div class="pantry-header">
+          <div>
+            <h2>Your pantry</h2>
+            <p class="section-lede">
+              Build your cart of ingredients, then get recipe ideas.
+            </p>
+          </div>
+          <div class="pantry-actions">
+            <button type="button" class="cta ghost" id="clear-pantry-btn" disabled>
+              Clear
+            </button>
+            <button type="button" class="cta" id="suggest-btn" disabled>
+              Get recipes
+            </button>
+          </div>
+        </div>
+        <p class="pantry-empty" id="pantry-empty">Your pantry is empty — scan an item to start.</p>
+        <ul class="pantry-list" id="pantry-list" hidden></ul>
+        <p class="pantry-status" id="pantry-status" hidden></p>
+      </section>
+
+      <section class="recipes shell" id="recipes-section" aria-label="Recipe suggestions" hidden>
+        <h2>Recipe ideas</h2>
+        <p class="section-lede" id="recipes-lede"></p>
+        <div class="recipe-carousel" id="recipe-carousel">
+          <button type="button" class="carousel-arrow prev" id="prev-recipe" aria-label="Previous recipe">
+            ‹
+          </button>
+          <div class="carousel-viewport" id="carousel-viewport">
+            <div class="carousel-track" id="recipes-grid"></div>
+          </div>
+          <button type="button" class="carousel-arrow next" id="next-recipe" aria-label="Next recipe">
+            ›
+          </button>
+        </div>
+        <p class="carousel-count" id="carousel-count"></p>
+      </section>
+
+      <section class="classes shell" id="classes-section">
+        <h2>Shop by aisle</h2>
         <p class="section-lede">
-          Trained on the Freiburg Groceries set — twenty-five everyday kitchen staples.
+          Smart Chef recognizes these everyday staples from the Freiburg Groceries set.
         </p>
         <ul class="class-grid" id="class-grid"></ul>
       </section>
     </main>
 
     <footer>
-      <p>Smart Chef · grocery CNN inference</p>
+      <div class="footer-inner">
+        <span class="wordmark small">
+          <span class="logo-mark" aria-hidden="true"></span>
+          Smart Chef
+        </span>
+        <p>Scan groceries. Cook smarter.</p>
+      </div>
     </footer>
 
     <script src="/static/js/app.js"></script>
