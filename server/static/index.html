@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Chef</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Sora:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/css/styles.css" />
+  </head>
+  <body>
+    <div class="atmosphere" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <a class="wordmark" href="/">Smart Chef</a>
+    </header>
+
+    <main>
+      <section class="hero" id="classify">
+        <div class="hero-copy">
+          <p class="brand">Smart Chef</p>
+          <h1>Snap a grocery. Know it instantly.</h1>
+          <p class="lede">
+            Upload a photo and our kitchen-trained CNN names the ingredient —
+            pasta, coffee, milk, and twenty-two more staples.
+          </p>
+          <div class="cta-row">
+            <label class="cta" for="file-input">Upload a photo</label>
+            <button type="button" class="cta ghost" id="sample-hint">
+              See what it recognizes
+            </button>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="produce-plane"></div>
+        </div>
+      </section>
+
+      <section class="workspace" aria-label="Classification workspace">
+        <form class="dropzone" id="upload-form">
+          <input
+            id="file-input"
+            type="file"
+            accept="image/jpeg,image/png,image/webp,image/gif,image/bmp"
+            hidden
+          />
+          <div class="dropzone-inner" id="drop-target">
+            <p class="drop-title">Drop an ingredient photo here</p>
+            <p class="drop-sub">or click to browse — JPEG, PNG, WebP</p>
+          </div>
+          <div class="preview-wrap" id="preview-wrap" hidden>
+            <img id="preview" alt="Uploaded grocery preview" />
+            <button type="button" class="clear-btn" id="clear-btn">Clear</button>
+          </div>
+        </form>
+
+        <aside class="result-panel" id="result-panel" aria-live="polite">
+          <p class="result-idle" id="result-idle">
+            Your classification will appear here after you upload.
+          </p>
+          <div id="result-body" hidden>
+            <p class="result-kicker">Looks like</p>
+            <h2 id="result-label">—</h2>
+            <p class="confidence" id="result-confidence"></p>
+            <ul class="topk" id="topk"></ul>
+          </div>
+          <p class="result-error" id="result-error" hidden></p>
+          <p class="result-loading" id="result-loading" hidden>Reading the pantry…</p>
+        </aside>
+      </section>
+
+      <section class="classes" id="classes-section">
+        <h2>What Smart Chef knows</h2>
+        <p class="section-lede">
+          Trained on the Freiburg Groceries set — twenty-five everyday kitchen staples.
+        </p>
+        <ul class="class-grid" id="class-grid"></ul>
+      </section>
+    </main>
+
+    <footer>
+      <p>Smart Chef · grocery CNN inference</p>
+    </footer>
+
+    <script src="/static/js/app.js"></script>
+  </body>
+</html>
