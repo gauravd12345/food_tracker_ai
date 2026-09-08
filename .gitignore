@@ -159,6 +159,7 @@ venv.bak/
 
 # Local uploads / caches
 uploads/
+data/
 *.pt.bak
 .DS_Store
 

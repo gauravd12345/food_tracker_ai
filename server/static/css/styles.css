@@ -269,6 +269,8 @@ body {
   box-shadow: var(--shadow);
   backdrop-filter: blur(8px);
   min-height: 280px;
+  max-height: min(80vh, 720px);
+  overflow: auto;
 }
 
 .result-idle,
@@ -315,6 +317,57 @@ body {
   margin: 0 0 1.2rem;
   color: var(--ink-soft);
   font-size: 0.95rem;
+}
+
+.confirm-form {
+  margin-top: 1.35rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--line);
+}
+
+.confirm-heading {
+  display: block;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 500;
+}
+
+.confirm-hint {
+  margin: 0.35rem 0 0.9rem;
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+}
+
+.custom-class {
+  width: 100%;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: rgba(252, 255, 250, 0.95);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  margin-bottom: 0.85rem;
+}
+
+.custom-class:focus {
+  outline: 2px solid rgba(196, 92, 38, 0.35);
+  border-color: var(--accent);
+}
+
+.confirm-btn {
+  width: 100%;
+}
+
+.confirm-status {
+  margin: 0.75rem 0 0;
+  font-size: 0.9rem;
+  color: var(--ok);
+}
+
+.confirm-status.is-error {
+  color: #9a2f2f;
 }
 
 .topk {

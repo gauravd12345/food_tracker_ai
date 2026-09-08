@@ -64,10 +64,29 @@
             Your classification will appear here after you upload.
           </p>
           <div id="result-body" hidden>
-            <p class="result-kicker">Looks like</p>
+            <p class="result-kicker">Model guess</p>
             <h2 id="result-label">—</h2>
             <p class="confidence" id="result-confidence"></p>
             <ul class="topk" id="topk"></ul>
+
+            <form class="confirm-form" id="confirm-form">
+              <label class="confirm-heading" for="custom-class">Confirm the food</label>
+              <p class="confirm-hint">
+                Edit if the guess is wrong, then confirm.
+              </p>
+              <input
+                type="text"
+                id="custom-class"
+                class="custom-class"
+                name="food-class"
+                placeholder="Food name"
+                autocomplete="off"
+              />
+              <button type="submit" class="cta confirm-btn" id="confirm-btn">
+                Confirm
+              </button>
+              <p class="confirm-status" id="confirm-status" hidden></p>
+            </form>
           </div>
           <p class="result-error" id="result-error" hidden></p>
           <p class="result-loading" id="result-loading" hidden>Reading the pantry…</p>
